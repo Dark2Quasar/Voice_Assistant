@@ -4,7 +4,6 @@ import webbrowser
 import urllib
 import pyttsx3
 import wikipedia
-import google.generativeai as genai
 
 
 def speak(audio):
@@ -58,21 +57,7 @@ def searchYouTube(query):
     url = f"https://www.youtube.com/search?q={query}"
     speak(f"searchig for {query} on YouTube.")
     webbrowser.open(url)
-
-def get_ai_response(query):
-    try:
-        genai.configure(api_key = "AIzaSyCPyxSx_RUdG4ZwHFA-_0qXJlagUmpl0D4")
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(query)
-        print(response.text)
-        speak(response.text)
-    except Exception as e:
-        print("Error:", e)
-        speak("Sorry, I am unable to process your request at the moment.")
-
-
-    
-    
+   
 
 if __name__ == "__main__":
     wishMe()
@@ -122,14 +107,7 @@ while True:
     elif "time" in query:
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
         print(strTime)
-        speak(f"Sir, the time is: {strTime}")
-
-    elif "gemini" in query:
-        speak("Initiating Gemini.")
-        query = takeCommand().lower()
-        speak("Generating AI Response")
-        get_ai_response(query)
-        
+        speak(f"Sir, the time is: {strTime}")        
         
 
     if query in ["exit","close","quit"]:
@@ -139,3 +117,4 @@ while True:
         
                     
        
+
